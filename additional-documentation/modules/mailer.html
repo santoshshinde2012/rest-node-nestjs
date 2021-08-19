@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nestjs-boilerolate documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+	   <link rel="stylesheet" href="../../styles/style.css">
+        <link rel="stylesheet" href="../../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../../styles/stripe.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../../" class="navbar-brand">nestjs-boilerolate documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content additional-page">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+<h1 id="mailer">Mailer</h1>
+<p>The objective of Mailer module</p>
+<ol>
+<li>This module would support sending emails via SMTP. We need to provide SMTP credentials in .env in the desired format mentioned below.</li>
+<li>Mailer module also supports the attachment functionality.</li>
+<li>We need to define the email template folder from where we need fetch the email template.</li>
+<li>Currently we support pug email templates</li>
+</ol>
+<h1 id="configuration">Configuration</h1>
+<p>To configure the SMTP service we need to add below values in the environment. The values are self explanatory.  </p>
+<div><pre class="line-numbers"><code class="language-none">DB_PORT=
+MAIL_HOST=
+MAIL_SECURE=
+MAIL_USER=
+MAIL_PASSWORD=
+MAIL_PORT=</code></pre></div><p>To configure our email template directory we need add <code>EMAIL_TEMPLATE_FOLDER</code> in the environment.</p>
+<div><pre class="line-numbers"><code class="language-none">EMAIL_TEMPLATE_FOLDER=</code></pre></div><h2 id="usability">Usability</h2>
+<p>Since Mailer is not required in every module it is not part of the CoreModule imports. To leverage the functionality you need to import the MailService and MailModule from core module</p>
+<div><pre class="line-numbers"><code class="language-import { MailService } from '@libs/core/src/modules/mail/mail.service';">    import { MailModule } from &#39;&#64;libs/core/modules/mail/ mail.module&#39;;</code></pre></div><p>Then we need to provide MailModule as a import and MailService as a provider to our Module</p>
+<div><pre class="line-numbers"><code class="language-none">&#64;Module({
+  imports: [TypeOrmModule.forFeature([User])],
+  providers: [UsersService],
+  imports: [TypeOrmModule.forFeature([User]), **MailModule**],
+  providers: [UsersService, **MailService**],
+  controllers: [UsersController],
+})
+</code></pre></div><p>Next, we need to add MailService as dependency </p>
+<p><code>constructor(private readonly mailService: MailService) {} </code>
+Finally to trigger an email, we need pass below parameters to sendMail function in MailService</p>
+<div><pre class="line-numbers"><code class="language-none"> await this.mailService.sendMail({
+        to: &#39;ethan.reynolds&#64;neosofttech.com&#39;, // list of receivers
+        from: &#39;noreply&#64;nestjs.com&#39;, // sender address
+        subject: &#39;Testing Nest MailerModule ✔&#39;, // Subject line
+        // text: &#39;welcome&#39;, // plaintext body
+        //html: &#39;&lt;b&gt;welcome&lt;/b&gt;&#39;, // HTML body content
+        template: &#39;./templates/welcome&#39;, // HTML body content
+        context: {
+          name: &#39;Ethan Reynolds&#39;,
+          phoneNo: +12653651478,
+          date: new Date(),
+        },
+      });</code></pre></div><blockquote>
+<p>template: Path of email template in folder structure eg. if welcome.pug is located in <root>/templates/welcome.pug then the value would be &#39;./templates/welcome&#39;</p>
+</blockquote>
+<blockquote>
+<p>context: Email template variable that need to dynamically parsed inside the email template</p>
+</blockquote>
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 2;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'mailer.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../../js/libs/custom-elements.min.js"></script>
+       <script src="../../js/libs/lit-html.js"></script>
+       
+       <script type="module" src="../../js/menu-wc.js" defer></script>
+       <script nomodule src="../../js/menu-wc_es5.js" defer></script>
+
+       <script src="../../js/libs/bootstrap-native.js"></script>
+
+       <script src="../../js/libs/es6-shim.min.js"></script>
+       <script src="../../js/libs/EventDispatcher.js"></script>
+       <script src="../../js/libs/promise.min.js"></script>
+       <script src="../../js/libs/zepto.min.js"></script>
+
+       <script src="../../js/compodoc.js"></script>
+
+       <script src="../../js/tabs.js"></script>
+       <script src="../../js/menu.js"></script>
+       <script src="../../js/libs/clipboard.min.js"></script>
+       <script src="../../js/libs/prism.js"></script>
+       <script src="../../js/sourceCode.js"></script>
+          <script src="../../js/search/search.js"></script>
+          <script src="../../js/search/lunr.min.js"></script>
+          <script src="../../js/search/search-lunr.js"></script>
+          <script src="../../js/search/search_index.js"></script>
+       <script src="../../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
